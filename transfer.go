@@ -90,7 +90,7 @@ type Transfer struct {
 	ChargeInfo              string             `json:"chargeInfo"`
 }
 
-func (c *client) QuoteTransfer(quote *TransferQuoteRequest) (float64, error) {
+func (c *Client) QuoteTransfer(quote *TransferQuoteRequest) (float64, error) {
 	result := make(map[string]float64)
 
 	body, err := json.Marshal(quote)
@@ -106,7 +106,7 @@ func (c *client) QuoteTransfer(quote *TransferQuoteRequest) (float64, error) {
 
 }
 
-func (c *client) CreateTransfer(t *TransferCreateRequest) (*Transfer, error) {
+func (c *Client) CreateTransfer(t *TransferCreateRequest) (*Transfer, error) {
 	result := &Transfer{}
 
 	body, err := json.Marshal(t)
@@ -121,7 +121,7 @@ func (c *client) CreateTransfer(t *TransferCreateRequest) (*Transfer, error) {
 	return result, nil
 }
 
-func (c *client) ConfirmTransfer(id string) (*Transfer, error) {
+func (c *Client) ConfirmTransfer(id string) (*Transfer, error) {
 	result := &Transfer{}
 
 	err := c.doRequest(fmt.Sprintf("transfer/%s/confirm", id), "POST", nil, nil, result)
@@ -131,7 +131,7 @@ func (c *client) ConfirmTransfer(id string) (*Transfer, error) {
 	return result, nil
 }
 
-func (c *client) TransferStatus(id string) (*Transfer, error) {
+func (c *Client) TransferStatus(id string) (*Transfer, error) {
 	result := &Transfer{}
 
 	err := c.doRequest(fmt.Sprintf("transfer/%s", id), "GET", nil, nil, result)
@@ -141,7 +141,7 @@ func (c *client) TransferStatus(id string) (*Transfer, error) {
 	return result, nil
 }
 
-func (c *client) TransferLookup(id string) (*Transfer, error) {
+func (c *Client) TransferLookup(id string) (*Transfer, error) {
 	result := &Transfer{}
 
 	params := make(url.Values)

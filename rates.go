@@ -13,7 +13,7 @@ func (r Rates) GetPair(pair string) (float64, error) {
 	return 0, fmt.Errorf("%s is not a vlid exchange rate pair", pair)
 }
 
-func (c *client) LiveExchangeRates() (Rates, error) {
+func (c *Client) LiveExchangeRates() (Rates, error) {
 	result := make(Rates)
 
 	err := c.doRequest("rates", "GET", nil, nil, &result)

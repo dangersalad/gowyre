@@ -7,8 +7,8 @@ import (
 	"time"
 )
 
-const API_KEY = "<sandbox api key>"
-const API_SECRET = "<sandbox api secret>"
+const API_KEY = "AK-8ZN7C9YZ-FYYT69T2-Z69RYJGH-BMALAVDQ"
+const API_SECRET = "SK-NBYH7F6T-678WDA7L-NC8LT9QR-DCR73434"
 
 func TestNewClient(t *testing.T) {
 	c := wyre.NewClient(API_KEY, API_SECRET, true)

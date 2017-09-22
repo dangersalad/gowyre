@@ -20,7 +20,7 @@ func (a *AccountInfo) GetAddress(currency string) (string, error) {
 	return "", fmt.Errorf("%s is not a valid deposit address currency", currency)
 }
 
-func (c *client) AccountInfo() (*AccountInfo, error) {
+func (c *Client) AccountInfo() (*AccountInfo, error) {
 	result := &AccountInfo{}
 
 	err := c.doRequest("account", "GET", nil, nil, result)

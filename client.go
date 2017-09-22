@@ -11,12 +11,12 @@ import (
 	"net/url"
 )
 
-type client struct {
+type Client struct {
 	http                 *http.Client
 	key, secret, baseURL string
 }
 
-func NewClient(key, secret string, sandbox bool) *client {
+func NewClient(key, secret string, sandbox bool) *Client {
 
 	// get the base URL, based on sandbox flag
 	baseURL := "https://api.sendwyre.com"
@@ -25,7 +25,7 @@ func NewClient(key, secret string, sandbox bool) *client {
 	}
 	baseURL += "/v2"
 
-	return &client{
+	return &Client{
 		http:    &http.Client{},
 		key:     key,
 		secret:  secret,
@@ -33,11 +33,11 @@ func NewClient(key, secret string, sandbox bool) *client {
 	}
 }
 
-func (c *client) makeURL(path string, params url.Values) string {
+func (c *Client) makeURL(path string, params url.Values) string {
 	return fmt.Sprintf("%s%s?%s", c.baseURL, normalizePath(path), params.Encode())
 }
 
-func (c *client) calculateRequestSignature(uri string, body []byte) (string, error) {
+func (c *Client) calculateRequestSignature(uri string, body []byte) (string, error) {
 	data := fmt.Sprintf("%s%s", uri, body)
 
 	h := hmac.New(sha256.New, []byte(c.secret))
@@ -52,7 +52,7 @@ func (c *client) calculateRequestSignature(uri string, body []byte) (string, err
 
 }
 
-func (c *client) doRequest(path, method string, params url.Values, body []byte, result interface{}) error {
+func (c *Client) doRequest(path, method string, params url.Values, body []byte, result interface{}) error {
 	if params == nil {
 		params = make(url.Values)
 	}
